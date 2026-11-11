@@ -1,14 +1,13 @@
 ---
 name: keybind-interception
-description: Trace keyboard shortcuts that trigger the wrong action or never reach the intended app. Use to diagnose and resolve one shortcut or audit a set of bindings.
+description: Map keyboard shortcuts across the user's apps, identify conflicts and actual usage, and guide fixes through recommended multiple-choice decisions.
 ---
 
 # keybind interception
 
-1. List each shortcut in scope, the focused app and mode, what it does now, and what the user wants it to do. For an audit, inventory the active bindings in the apps and layers in scope. Ask about desired behavior only where it changes the fix.
-2. Reproduce one shortcut and trace it from the keyboard to the intended action. Check OS shortcuts, remappers, host apps such as terminals or editors, multiplexers or remote sessions, and the target app's active mode as applicable. Read effective bindings and their config sources. A config file or default by itself does not prove what is active.
-3. Find the first layer that consumes or rewrites the key. Compare with a working shortcut or bypass one layer at a time. For terminal apps, check the bytes or key event the child receives and whether the target can decode that modifier. A host unbind and a target binding can both be necessary.
-4. Make the smallest authorized edit in the source that owns the binding. Preserve unrelated shortcuts and existing fallbacks. Reload the affected layer or start a fresh target session if needed.
-5. Test the original shortcut in the original context and verify the intended action plus any displaced shortcut the user wants to keep. A successful config parse only proves the file loads. If a physical keypress is needed, give the user one exact check and ask what happened.
-
-Keep going through the list until each shortcut works, the user chooses to keep or drop it, or a specific blocker needs their input. Report the outcome per shortcut and identify what still needs a live check.
+1. Inventory installed and running apps, OS shortcuts, remappers, and tools inside terminals or editors. Collect available effective bindings, overrides, and contexts from config, exports, menus, and authoritative docs. Record coverage and anything still unknown.
+2. Use available recent activity and stated preferences to identify the apps and shortcuts the user uses. Mark observed use, user-confirmed use, and unknown use separately. Missing activity leaves use unknown.
+3. Build one map with shortcut, action, app or layer, context, usage, conflicting binding, recommended fix, and source. Trace which layer receives the key first. Shared keys conflict when their active contexts overlap.
+4. Present a recommended setup based on that map. Use the host's multiple-choice question tool to resolve choices, with the recommendation first. Each question names the competing actions and explains what each choice changes. Batch independent choices. Ask about important usage gaps the same way.
+5. Apply the selected fixes in the config that owns each binding, reload as needed, and verify automatically where possible. Keep unrelated bindings and useful fallbacks. Request a physical key check only when needed, using multiple-choice outcomes such as works, wrong action, or no action.
+6. Update the map as decisions land. Continue until every identified conflict is fixed, intentionally kept, dropped, or blocked with a specific reason. Report any verification still pending.
