@@ -5,6 +5,7 @@ Skills from my own Claude Code and Codex setup, trimmed to work for anyone.
 | skill | what it does |
 | --- | --- |
 | `codex-pet` | builds and checks a Codex pet sprite atlas with a deterministic pipeline (Apache 2.0, see its `LICENSE.txt`) |
+| `keybind-interception` | traces shortcut conflicts and verifies the intended key action |
 | `video-editing` | cuts, normalizes, and captions short-form video with ffmpeg, and analyzes reels from their real media |
 
 ## install
